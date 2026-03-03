@@ -12,7 +12,7 @@ export default function About() {
             <h1 className=" font-extrabold text-[33px] leading-tight">
               Don’t squeeze in a sedan when you could relax in a van.
             </h1>
-            <div className="flex flex-col space-y-6 font-medium" >
+            <div className="flex flex-col space-y-6 font-medium">
               <p className="text-[16px] ">
                 Our mission is to enliven your road trip with the perfect travel
                 van rental. Our vans are recertified before each trip to ensure
@@ -23,6 +23,15 @@ export default function About() {
                 Our team is full of vanlife enthusiasts who know firsthand the
                 magic of touring the world on 4 wheels.
               </p>
+            </div>
+            <div className="w-full h-49  bg-[#FFCC8D] rounded-md flex flex-col justify-center gap-5 font-[inter] p-6">
+              <div className="font-bold text-[32px]">
+                <h1 className="">Your destination is waiting.</h1>
+                <h1>Your van is Ready.</h1>
+              </div>
+              <button className="w-40 flex items-center justify-center bg-black text-white p-2 rounded-md font-[inter] font-semibold">
+                Explore Our vans
+              </button>
             </div>
           </div>
         </div>
