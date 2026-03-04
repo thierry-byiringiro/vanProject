@@ -22,7 +22,6 @@ export default function VanDetails() {
   }
   return (
     <>
-      <NavBar />
       {vanDetail ? (
         <div className="flex flex-col p-6 space-y-5">
           <img src={vanDetail.imageUrl} className="rounded-md" />
@@ -44,7 +43,6 @@ export default function VanDetails() {
       ) : (
         <h2>Loading...</h2>
       )}
-      <Footer />
     </>
   );
 }
