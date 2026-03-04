@@ -47,14 +47,12 @@ export default function Vans() {
 
   return (
     <>
-      <NavBar />
       <h1 className="font-bold text-2xl self-start ml-15">
         Explore our van options
       </h1>
       <div className="flex flex-wrap w-full p-6 space-x-3 h-fit justify-center items-center gap-6">
         {vansElement}
       </div>
-      <Footer />
     </>
   );
 }
