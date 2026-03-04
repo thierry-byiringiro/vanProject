@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Footer from "./Footer";
 import NavBar from "./Navbar";
+import { NavLink } from "react-router-dom";
 
 export default function Vans() {
   const [vans, setVans] = useState([]);
@@ -10,27 +11,39 @@ export default function Vans() {
       .then((data) => setVans(data.vans));
   }, []);
   const vansElement = vans.map((element) => {
-    const elType = element.type === 'simple' ? "#E17654" : element.type === 'rugged' ? "#115E59" : "#161616";
-    
-    return(
-    <div key={element.id} className="w-50 h-fit flex flex-col justify-center">
-      <img src={element.imageUrl} className="rounded-md w-50 h-50" />
-      <div className="flex flex-row justify-between">
-        <h3 className=" font-bold">{element.name}</h3>
-        <p className="flex flex-col">
-          <span className="font-bold">${element.price}</span>
-          <span className="-mt-2">/day</span>
-        </p>
+    const elType =
+      element.type === "simple"
+        ? "#E17654"
+        : element.type === "rugged"
+          ? "#115E59"
+          : "#161616";
+
+    return (
+      <div key={element.id} className="w-50 h-fit flex flex-col justify-center">
+        <NavLink
+          to={`/vans/${element.id}`}
+          aria-label={`View details for ${element.name}, 
+                             priced at $${element.price} per day`}
+          
+        >
+          <img src={element.imageUrl} className="rounded-md w-50 h-50" />
+          <div className="flex flex-row justify-between">
+            <h3 className=" font-bold">{element.name}</h3>
+            <p className="flex flex-col">
+              <span className="font-bold">${element.price}</span>
+              <span className="-mt-2">/day</span>
+            </p>
+          </div>
+          <button
+            className={`selected w-[80.71px] h-[30.89px] rounded-md text-white p-2 flex justify-center items-center -mt-3 font-semibold`}
+            style={{ backgroundColor: elType }}
+          >
+            {element.type}
+          </button>
+        </NavLink>
       </div>
-      <button
-        className={`selected w-[80.71px] h-[30.89px] rounded-md text-white p-2 flex justify-center items-center -mt-3 font-semibold`}
-        style={{backgroundColor : elType}}
-      >
-        {element.type}
-      </button>
-    </div>
-  )
-});
+    );
+  });
 
   return (
     <>
