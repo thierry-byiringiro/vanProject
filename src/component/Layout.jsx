@@ -1,7 +1,13 @@
-export default function Layout(){
-    return (
-        <>
-            <h1>Hey there am the layout page</h1>
-        </>
-    );
+import { Outlet } from "react-router-dom";
+import NavBar from "./Navbar";
+import Footer from "./Footer";
+
+export default function Layout() {
+  return (
+    <>
+      <NavBar />
+      <Outlet />
+      <Footer />
+    </>
+  );
 }
