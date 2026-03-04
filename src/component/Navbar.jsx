@@ -1,4 +1,4 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Link, Route, Routes, NavLink } from "react-router-dom";
 export default function NavBar({ Home, About }) {
   return (
     <>
@@ -7,12 +7,9 @@ export default function NavBar({ Home, About }) {
           <h1 className="font-bold text-2xl">#VANLIFE</h1>
         </Link>
         <div className="flex text-lg font-bold space-x-10">
-          <Link to="/">
-            <button>Home</button>
-          </Link>
-          <Link to="/about">
-            <button>Vans</button>
-          </Link>
+          <NavLink to="/"></NavLink>
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/vans">Vans</NavLink>
         </div>
       </div>
     </>
