@@ -5,7 +5,6 @@ export default function About() {
   return (
     <>
       <div className="w-full h-full flex flex-col justify-center items-center mx-auto font-[inter] bg-white text-black ">
-        <NavBar />
         <div className="w-full h-full  flex flex-col">
           <img src="/imgas.png" alt="" />
           <div className="flex flex-col p-5 space-y-5">
@@ -35,7 +34,6 @@ export default function About() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );
