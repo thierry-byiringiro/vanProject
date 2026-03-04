@@ -7,9 +7,30 @@ export default function NavBar() {
           <h1 className="font-bold text-2xl">#VANLIFE</h1>
         </NavLink>
         <div className="flex text-lg font-bold space-x-10">
-          <NavLink to="/" className="hover:underline"></NavLink>
-          <NavLink to="/about" className="hover:underline">About</NavLink>
-          <NavLink to="/vans" className="hover:underline">Vans</NavLink>
+          <NavLink
+            to="/host"
+            className={({ isActive }) =>
+              `${isActive ? "underline text-green-600" : ""} hover:underline`
+            }
+          >
+            Host
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `${isActive ? "underline text-green-600" : ""} hover:underline`
+            }
+          >
+            About
+          </NavLink>
+          <NavLink
+            to="/vans"
+            className={({ isActive }) =>
+              `${isActive ? "underline text-green-600" : ""} hover:underline`
+            }
+          >
+            Vans
+          </NavLink>
         </div>
       </div>
     </>
