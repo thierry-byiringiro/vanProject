@@ -4,7 +4,6 @@ export default function Home() {
   return (
     <>
       <div className="w-full h-full flex flex-col justify-center items-center mx-auto">
-        <NavBar />
         <div className="w-140 h-full bg-[url('/imgs.png')] bg-cover bg-center text-white">
           <div className="flex flex-col justify-between items-center space-y-10 p-4">
             <h1 className="font-extrabold mt-15 text-[40px] font-[inter]">
@@ -19,7 +18,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );
