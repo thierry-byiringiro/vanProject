@@ -9,7 +9,7 @@ export default function HostVans() {
       .then((data) => setHostVan(data.vans));
   }, []);
   const getHostVans = hostVan.map((element) => (
-    <NavLink key={element.id} to={`/host/vans/${element.id}`}>
+    <NavLink key={element.id} to={`${element.id}`}>
       <div
         key={element.id}
         className="w-123.5 h-30.25 bg-[#FFFFFF] rounded-md flex flex-row items-center p-4 space-x-6"
