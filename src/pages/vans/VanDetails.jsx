@@ -1,4 +1,4 @@
-import { useParams,NavLink,useLocation } from "react-router-dom";
+import { useParams, NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function VanDetails() {
@@ -19,10 +19,11 @@ export default function VanDetails() {
           ? "#115E59"
           : "#161616";
   }
+  const search = location.state.searchP ? `..?${location.state.searchP}` : `..`;
   return (
     <>
-      <NavLink to={`${location.state.searchP ? `..?${location.state.searchP}` : `..`}`} relative="path" className="back-button">
-        &larr; <span>Back to all vans</span>
+      <NavLink to={`${search}`} relative="path" className="back-button">
+        &larr; {location.state.searchP ? (<span>Back to {vanDetail.type} vans</span>) : (<span>Back to all vans</span>)}
       </NavLink>
       {vanDetail ? (
         <div className="flex flex-col p-6 space-y-5">
