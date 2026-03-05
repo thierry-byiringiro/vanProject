@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import NavBar from "../../component/Navbar";
+import { getVans } from "../../assets/api";
 import { NavLink, useSearchParams } from "react-router-dom";
 
 export default function Vans() {
   const [vans, setVans] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading,setLoading] = useState(false);
   let typeFilter = searchParams.get("type");
   useEffect(() => {
-    fetch("api/vans")
-      .then((response) => response.json())
-      .then((data) => setVans(data.vans));
+    async function loadVans() {
+      setLoading(true)
+      const data = await getVans();
+      setVans(data);
+      setLoading(false)
+    }
+
+    loadVans();
   }, []);
   const handleFilters = (key, value) => {
     setSearchParams((prevParams) => {
@@ -37,7 +44,7 @@ export default function Vans() {
       <div key={element.id} className="w-50 h-fit flex flex-col justify-center">
         <NavLink
           to={`${element.id}`}
-          state={{searchP : searchParams.toString()}}
+          state={{ searchP: searchParams.toString() }}
           aria-label={`View details for ${element.name}, 
                              priced at $${element.price} per day`}
         >
@@ -60,6 +67,9 @@ export default function Vans() {
     );
   });
   const isType = searchParams.has("type");
+  if(loading){
+    <h1>Loading ...</h1>
+  }
   return (
     <>
       <h1 className="font-bold text-2xl self-start ml-15">
@@ -69,19 +79,19 @@ export default function Vans() {
         <div className="w-87 h-9 flex space-x-5 justify-center items-center">
           <button
             onClick={() => handleFilters("type", "simple")}
-            className={`w-26 h-9  ${typeFilter === 'simple' ? "bg-[#E17654]" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
+            className={`w-26 h-9  ${typeFilter === "simple" ? "bg-[#E17654]" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
           >
             Simple
           </button>
           <button
             onClick={() => handleFilters("type", "rugged")}
-            className={`w-26 h-9  ${typeFilter === 'rugged' ? "bg-[#115E59]" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
+            className={`w-26 h-9  ${typeFilter === "rugged" ? "bg-[#115E59]" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
           >
             Rugged
           </button>
           <button
             onClick={() => handleFilters("type", "luxury")}
-            className={`w-26 h-9  ${typeFilter === 'luxury' ? "bg-[#161616] text-white" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
+            className={`w-26 h-9  ${typeFilter === "luxury" ? "bg-[#161616] text-white" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
           >
             Luxury
           </button>
