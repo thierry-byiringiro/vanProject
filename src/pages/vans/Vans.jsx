@@ -12,8 +12,19 @@ export default function Vans() {
       .then((response) => response.json())
       .then((data) => setVans(data.vans));
   }, []);
-
-  const displayVans = typeFilter ? vans.filter(van => String(van.type).toLowerCase() === typeFilter) : vans;
+  const handleFilters = (key, value) => {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  };
+  const displayVans = typeFilter
+    ? vans.filter((van) => String(van.type).toLowerCase() === typeFilter)
+    : vans;
   const vansElement = displayVans.map((element) => {
     const elType =
       element.type === "simple"
@@ -25,7 +36,8 @@ export default function Vans() {
     return (
       <div key={element.id} className="w-50 h-fit flex flex-col justify-center">
         <NavLink
-          to={`/vans/${element.id}`}
+          to={`${element.id}`}
+          state={{searchP : searchParams.toString()}}
           aria-label={`View details for ${element.name}, 
                              priced at $${element.price} per day`}
         >
@@ -47,7 +59,7 @@ export default function Vans() {
       </div>
     );
   });
-
+  const isType = searchParams.has("type");
   return (
     <>
       <h1 className="font-bold text-2xl self-start ml-15">
@@ -55,11 +67,33 @@ export default function Vans() {
       </h1>
       <div className="w-full flex items-center space-x-8 text-black  ml-30 mt-3">
         <div className="w-87 h-9 flex space-x-5 justify-center items-center">
-          <NavLink to="?type=simple" className="w-26 h-9 bg-[#FFEAD0] rounded-md flex items-center justify-center">Simple</NavLink>
-          <NavLink to="?type=rugged" className="w-26 h-9 bg-[#FFEAD0] rounded-md flex items-center justify-center">Rugged</NavLink>
-          <NavLink to="?type=luxury" className="w-26 h-9 bg-[#FFEAD0] rounded-md flex items-center justify-center">Luxury</NavLink>
+          <button
+            onClick={() => handleFilters("type", "simple")}
+            className={`w-26 h-9  ${typeFilter === 'simple' ? "bg-[#E17654]" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
+          >
+            Simple
+          </button>
+          <button
+            onClick={() => handleFilters("type", "rugged")}
+            className={`w-26 h-9  ${typeFilter === 'rugged' ? "bg-[#115E59]" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
+          >
+            Rugged
+          </button>
+          <button
+            onClick={() => handleFilters("type", "luxury")}
+            className={`w-26 h-9  ${typeFilter === 'luxury' ? "bg-[#161616] text-white" : "bg-[#FFEAD0]"} rounded-md flex items-center justify-center cursor-pointer`}
+          >
+            Luxury
+          </button>
         </div>
-        <NavLink to="." className="underline">Clear filters</NavLink>
+        {isType && (
+          <button
+            onClick={() => handleFilters("type", null)}
+            className="underline cursor-pointer"
+          >
+            Clear filters
+          </button>
+        )}
       </div>
       <div className="flex flex-wrap w-full p-6 space-x-3 h-fit justify-center items-center gap-6">
         {vansElement}
