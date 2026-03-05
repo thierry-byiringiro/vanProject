@@ -1,4 +1,4 @@
-.inter{
+.inter {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 800;
@@ -13,4 +13,17 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.back-button {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin-top: 10px;
+  margin-right: 330px;
+  padding-bottom:10px;
+}
+
+.back-button span:hover {
+  text-decoration: underline;
 }
