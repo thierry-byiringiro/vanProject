@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useParams,NavLink,useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 export default function VanDetails() {
   const [vanDetail, setVanDetail] = useState({});
   const params = useParams();
+  const location = useLocation();
   useEffect(() => {
     fetch(`/api/vans/${params.id}`)
       .then((respose) => respose.json())
@@ -20,6 +21,9 @@ export default function VanDetails() {
   }
   return (
     <>
+      <NavLink to={`${location.state.searchP ? `..?${location.state.searchP}` : `..`}`} relative="path" className="back-button">
+        &larr; <span>Back to all vans</span>
+      </NavLink>
       {vanDetail ? (
         <div className="flex flex-col p-6 space-y-5">
           <img src={vanDetail.imageUrl} className="rounded-md" />
@@ -27,7 +31,8 @@ export default function VanDetails() {
             className={`selected w-[80.71px] h-[30.89px] rounded-md text-white p-2 flex justify-center items-center  font-semibold`}
             style={{ backgroundColor: elType }}
           >
-            {String(vanDetail.type).charAt(0).toUpperCase() + String(vanDetail.type).slice(1)}
+            {String(vanDetail.type).charAt(0).toUpperCase() +
+              String(vanDetail.type).slice(1)}
           </button>
           <h2 className=" font-bold">{vanDetail.name}</h2>
           <p className="">
