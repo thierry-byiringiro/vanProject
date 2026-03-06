@@ -5,7 +5,7 @@ export default function HostLayout() {
     <>
       <nav className="flex flex-row space-x-8 font-bold w-full justify-start py-4 px-6">
         <NavLink
-          to=". "
+          to="."
           end
           className={({ isActive }) =>
             `${isActive ? "underline text-green-600" : ""}`
