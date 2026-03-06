@@ -9,7 +9,6 @@ export default function HostVanDetail() {
     fetch(`/api/host/vans/${params.id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.vans[0])
         return setVanDetail(data.vans)
       });
   }, []);
