@@ -2,23 +2,18 @@ import { useEffect, useState } from "react";
 import Footer from "../../component/Footer";
 import NavBar from "../../component/Navbar";
 import { getVans } from "../../assets/api";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useLoaderData, useSearchParams } from "react-router-dom";
+export async function loader() {
+  const data = await getVans();
+  return data;
+}
 
 export default function Vans() {
-  const [vans, setVans] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [loading,setLoading] = useState(false);
+  const [error, setError] = useState(null);
   let typeFilter = searchParams.get("type");
-  useEffect(() => {
-    async function loadVans() {
-      setLoading(true)
-      const data = await getVans();
-      setVans(data);
-      setLoading(false)
-    }
+  const vans = useLoaderData();
 
-    loadVans();
-  }, []);
   const handleFilters = (key, value) => {
     setSearchParams((prevParams) => {
       if (value === null) {
@@ -67,8 +62,8 @@ export default function Vans() {
     );
   });
   const isType = searchParams.has("type");
-  if(loading){
-    <h1>Loading ...</h1>
+  if (error) {
+    return <h1 aria-live="assertive">There was an error: {error.message}</h1>;
   }
   return (
     <>
