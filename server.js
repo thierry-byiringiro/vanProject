@@ -1,4 +1,4 @@
-import { createServer, Model } from "miragejs";
+import { createServer, Model, Response } from "miragejs";
 
 createServer({
   models: {
@@ -79,6 +79,7 @@ createServer({
     this.logging = false;
 
     this.get("/vans", (schema, request) => {
+      // return new Response(400, {}, {error: "Error fetching data"})
       return schema.vans.all();
     });
 
@@ -93,7 +94,8 @@ createServer({
 
     this.get("/host/vans/:id", (schema, request) => {
       const id = request.params.id;
-      return schema.vans.where({ id, hostId: "123" });
+      return schema.vans.findBy({ id, hostId: "123" });
     });
+    this.passthrough();
   },
 });
