@@ -1,4 +1,5 @@
 import { BrowserRouter, Link, Route, Routes, NavLink } from "react-router-dom";
+import icon from '../../public/icon.png'
 export default function NavBar() {
   return (
     <>
@@ -30,6 +31,14 @@ export default function NavBar() {
             }
           >
             Vans
+          </NavLink>
+          <NavLink
+            to="/login"
+            className={({ isActive }) =>
+              `${isActive ? "underline text-green-600" : ""} hover:underline`
+            }
+          >
+            <img src={icon} alt="the icon avatar" />
           </NavLink>
         </div>
       </div>
