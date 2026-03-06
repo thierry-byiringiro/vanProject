@@ -29,10 +29,10 @@ import Login from "./pages/Login.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
+    <Route element={<Layout />}>
+      <Route path="/" element={<Home />} />
       <Route path="about" element={<About />} />
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={< Login/>}/>
       <Route
         path="vans"
         element={<Vans />}
