@@ -3,14 +3,18 @@ import { useParams, NavLink, Outlet } from "react-router-dom";
 
 export default function HostVanDetail() {
   const params = useParams();
-  const [vanDetail, setVanDetail] = useState([]);
+  console.log(params)
+  const [vanDetail, setVanDetail] = useState(null);
   useEffect(() => {
     fetch(`/api/host/vans/${params.id}`)
       .then((response) => response.json())
-      .then((data) => setVanDetail(data.vans[0]));
+      .then((data) => {
+        console.log(data.vans[0])
+        return setVanDetail(data.vans)
+      });
   }, []);
   if (!vanDetail) {
-    <h1>Loading ...</h1>;
+     return <h1>Loading ...</h1>;
   }
   const elType =
     vanDetail.type === "simple"
@@ -36,7 +40,7 @@ export default function HostVanDetail() {
           <div>
             <button
               className={`selected w-[80.71px] h-[30.89px] rounded-md text-white p-2 flex justify-center items-center -mt-3 font-semibold`}
-              style={{ backgroundColor: elType }}
+              style={{ backgroundColor: "#E17654" }}
             >
               {vanDetail.type}
             </button>
