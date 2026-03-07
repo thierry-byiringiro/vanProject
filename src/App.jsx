@@ -6,7 +6,9 @@ import ReactDOM from "react-dom/client";
 import About from "./pages/About.jsx";
 import Home from "./pages/Home.jsx";
 import Vans, { loader as vansLoader } from "./pages/vans/Vans.jsx";
-import VanDetails from "./pages/vans/VanDetails.jsx";
+import VanDetails, {
+  loader as vanDetailLoader,
+} from "./pages/vans/VanDetails.jsx";
 import {
   Route,
   createBrowserRouter,
@@ -18,8 +20,10 @@ import Dashboard from "./pages/host/Dashboard.jsx";
 import Income from "./pages/host/Income.jsx";
 import Reviews from "./pages/host/Reviews.jsx";
 import HostLayout from "./component/HostLayout.jsx";
-import HostVans from "./pages/host/HostVans.jsx";
-import HostVanDetail from "./pages/host/HostVansDetail.jsx";
+import HostVans, { loader as hostVanLoader } from "./pages/host/HostVans.jsx";
+import HostVanDetail, {
+  loader as HostVanDetailLoader,
+} from "./pages/host/HostVansDetail.jsx";
 import HostVanInfo from "./pages/host/HostVanInfo.jsx";
 import HostVanPhotos from "./pages/host/HostVanPhotos.jsx";
 import HostVanPricing from "./pages/host/HostVanPricing.jsx";
@@ -32,7 +36,7 @@ const router = createBrowserRouter(
     <Route element={<Layout />}>
       <Route path="/" element={<Home />} />
       <Route path="about" element={<About />} />
-      <Route path="login" element={< Login/>}/>
+      <Route path="login" element={<Login />} />
       <Route
         path="vans"
         element={<Vans />}
@@ -40,16 +44,66 @@ const router = createBrowserRouter(
         errorElement={<Error />}
         HydrateFallback={() => <h1>Loading Vans...</h1>}
       />
-      <Route path="vans/:id" element={<VanDetails />} />
+      <Route
+        path="vans/:id"
+        element={<VanDetails />}
+        loader={vanDetailLoader}
+      />
       <Route path="host" element={<HostLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path="income" element={<Income />} />
-        <Route path="reviews" element={<Reviews />} />
-        <Route path="vans" element={<HostVans />} />
-        <Route path="vans/:id" element={<HostVanDetail />}>
-          <Route index element={<HostVanInfo />} />
-          <Route path="pricing" element={<HostVanPricing />} />
-          <Route path="photos" element={<HostVanPhotos />} />
+        <Route
+          index
+          element={<Dashboard />}
+          loader={async () => {
+            return null;
+          }}
+        />
+        <Route
+          path="income"
+          element={<Income />}
+          loader={async () => {
+            return null;
+          }}
+        />
+        <Route
+          path="reviews"
+          element={<Reviews />}
+          loader={async () => {
+            return null;
+          }}
+        />
+        <Route
+          path="vans"
+          element={<HostVans />}
+          loader={hostVanLoader}
+          HydrateFallback={() => <h1>Loading Vans...</h1>}
+        />
+        <Route
+          path="vans/:id"
+          element={<HostVanDetail />}
+          loader={HostVanDetailLoader}
+          HydrateFallback={() => <h1>Loading Vans...</h1>}
+        >
+          <Route
+            index
+            element={<HostVanInfo />}
+            loader={async () => {
+              return null;
+            }}
+          />
+          <Route
+            path="pricing"
+            element={<HostVanPricing />}
+            loader={async () => {
+              return null;
+            }}
+          />
+          <Route
+            path="photos"
+            element={<HostVanPhotos />}
+            loader={async () => {
+              return null;
+            }}
+          />
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />
