@@ -15,9 +15,9 @@ export default function HostVanInfo() {
         </div>
         <div className="w-full flex space-x-1 flex-wrap">
           <h1 className="font-semibold text-xl">Description: </h1>
-          <span className="text-lg">{vanDetail.description}</span>
+          <span className="text-lg font-semibold">{vanDetail.description}</span>
         </div>
-        <h4>
+        <h4 className="font-semibold">
           Visibility: <span>Public</span>
         </h4>
       </div>
