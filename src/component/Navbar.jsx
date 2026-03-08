@@ -33,7 +33,7 @@ export default function NavBar() {
             Vans
           </NavLink>
           <NavLink
-            to="/login"
+            to="login"
             className={({ isActive }) =>
               `${isActive ? "underline text-green-600" : ""} hover:underline`
             }
