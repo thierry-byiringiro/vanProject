@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../assets/api";
-export async function loader({params}){
-  const data = await getHostVans(params.id);
-  return data;
+import { requireAuth } from "../../assets/utils.js";
+export async function loader({ params }) {
+  await requireAuth();
+  return await getHostVans(params.id);
 }
 export default function HostVanDetail() {
   const vanDetail = useLoaderData();
   if (!vanDetail) {
-     return <h1>Loading ...</h1>;
+    return <h1>Loading ...</h1>;
   }
   const elType =
     vanDetail.type === "simple"
@@ -69,7 +70,7 @@ export default function HostVanDetail() {
             Photos
           </NavLink>
         </nav>
-        <Outlet  context={vanDetail}/>
+        <Outlet context={vanDetail} />
       </div>
     </>
   );
