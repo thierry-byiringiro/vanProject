@@ -29,7 +29,7 @@ import HostVanPhotos from "./pages/host/HostVanPhotos.jsx";
 import HostVanPricing from "./pages/host/HostVanPricing.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Error from "./pages/Error.jsx";
-import Login from "./pages/Login.jsx";
+import Login, {loader as loginLoader,action as loginAction} from "./pages/Login.jsx";
 import { requireAuth } from "./assets/utils.js";
 
 const router = createBrowserRouter(
@@ -37,7 +37,7 @@ const router = createBrowserRouter(
     <Route element={<Layout />}>
       <Route path="/" element={<Home />} />
       <Route path="about" element={<About />} />
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />}loader={loginLoader} action={loginAction}/>
       <Route
         path="vans"
         element={<Vans />}
