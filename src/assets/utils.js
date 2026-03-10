@@ -1,5 +1,5 @@
 export async function requireAuth() {
-    const isLoggedIn = false;
+    const isLoggedIn = localStorage.getItem("loggedIn");
     
     if (!isLoggedIn) {
         throw { 
