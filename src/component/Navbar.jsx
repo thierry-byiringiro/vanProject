@@ -1,5 +1,5 @@
 import { BrowserRouter, Link, Route, Routes, NavLink } from "react-router-dom";
-import icon from "../../public/icon.png";
+import icon from '../assets/icon.png';
 export default function NavBar() {
   function fakeLogOut() {
     localStorage.removeItem("loggedIn");
