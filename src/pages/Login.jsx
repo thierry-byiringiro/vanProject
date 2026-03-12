@@ -6,6 +6,7 @@ import {
   Form,
   redirect,
   useActionData,
+  useNavigation,
 } from "react-router-dom";
 import { loginUser } from "../assets/api";
 export function loader({ request }) {
@@ -16,9 +17,9 @@ export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  localStorage.setItem("loggedIn", true);
   try {
     const data = await loginUser({ email, password });
+    localStorage.setItem("loggedIn", true);
     throw {
       status: 302,
       redirectTo: "/host",
@@ -31,20 +32,9 @@ export async function action({ request }) {
   }
 }
 export default function Login() {
+  const status = useNavigation().state;
   const errorMessage = useActionData();
-  const [status, setStatus] = useState("idle");
   const navigate = useNavigate();
-  function handleSubmit(e) {
-    e.preventDefault();
-    setStatus("submitting");
-    setError(null);
-    loginUser(loginFormData)
-      .then((el) => {
-        navigate("/host", { replace: true });
-      })
-      .catch((err) => setError(err.message))
-      .finally(() => setStatus("idle"));
-  }
   const message = useLoaderData();
 
   return (
@@ -53,7 +43,9 @@ export default function Login() {
       {message && (
         <h2 className="font-bold text-2xl p-2 text-red-700">{message}</h2>
       )}
-      {errorMessage && <p className="font-bold text-lg p-2 text-red-700">⚠️{errorMessage}</p>}
+      {errorMessage && (
+        <p className="font-bold text-lg p-2 text-red-700">⚠️{errorMessage}</p>
+      )}
       <Form
         method="post"
         className="login-form flex flex-col w-full h-full"
