@@ -58,12 +58,12 @@ const router = createBrowserRouter(
         element={<VanDetails />}
         loader={vanDetailLoader}
       />
-      <Route path="host" element={<HostLayout />} errorElement={<Error/>}>
+      <Route path="host" element={<HostLayout />} errorElement={<Error />}>
         <Route
           index
           element={<Dashboard />}
           loader={async ({ request }) => {
-            return  requireAuth(request);
+            return requireAuth(request);
           }}
         />
         <Route
