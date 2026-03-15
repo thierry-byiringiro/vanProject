@@ -58,26 +58,26 @@ const router = createBrowserRouter(
         element={<VanDetails />}
         loader={vanDetailLoader}
       />
-      <Route path="host" element={<HostLayout />} errorElement={<Error />}>
+      <Route path="host" element={<HostLayout />} errorElement={<Error/>}>
         <Route
           index
           element={<Dashboard />}
-          loader={async () => {
-            return await requireAuth();
+          loader={async ({ request }) => {
+            return  requireAuth(request);
           }}
         />
         <Route
           path="income"
           element={<Income />}
-          loader={async () => {
-            return await requireAuth();
+          loader={async ({ request }) => {
+            return await requireAuth(request);
           }}
         />
         <Route
           path="reviews"
           element={<Reviews />}
-          loader={async () => {
-            return await requireAuth();
+          loader={async ({ request }) => {
+            return await requireAuth(request);
           }}
         />
         <Route
@@ -95,8 +95,8 @@ const router = createBrowserRouter(
           <Route
             index
             element={<HostVanInfo />}
-            loader={async () => {
-              return await requireAuth();
+            loader={async ({ request }) => {
+              return await requireAuth(request);
             }}
           />
           <Route
@@ -109,8 +109,8 @@ const router = createBrowserRouter(
           <Route
             path="photos"
             element={<HostVanPhotos />}
-            loader={async () => {
-              return await requireAuth();
+            loader={async ({ request }) => {
+              return await requireAuth(request);
             }}
           />
         </Route>
