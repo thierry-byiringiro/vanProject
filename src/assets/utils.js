@@ -4,7 +4,7 @@ export async function requireAuth(request) {
     if (!isLoggedIn) {
         throw { 
             status: 302, 
-            redirectTo: `/login?message=you must login first&redirect=${pathname}` 
+            redirectTo: `/login?message=you must login first.&redirectTo=${pathname}` 
         };
     }
     return null;
