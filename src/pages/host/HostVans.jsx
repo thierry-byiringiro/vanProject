@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { NavLink, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../assets/api";
 import { requireAuth } from "../../assets/utils";
-export async function loader() {
-   await requireAuth();
+export async function loader({ request }) {
+  await requireAuth(request);
   return await getHostVans();
 }
 export default function HostVans() {
@@ -16,8 +16,8 @@ export default function HostVans() {
       >
         <img src={element.imageUrl} alt="" className="w-25 h-25 rounded-md " />
         <div>
-          <h1 className="font-bold">{element.name}</h1>
-          $<span>{element.price}</span>/day
+          <h1 className="font-bold">{element.name}</h1>$
+          <span>{element.price}</span>/day
         </div>
       </div>
     </NavLink>
