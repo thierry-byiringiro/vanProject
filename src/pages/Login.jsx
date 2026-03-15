@@ -17,12 +17,15 @@ export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
+  const pathname =
+    new URL(request.url).searchParams.get("redirectTo") || "/host";
+  console.log(pathname);
   try {
     const data = await loginUser({ email, password });
     localStorage.setItem("loggedIn", true);
     throw {
       status: 302,
-      redirectTo: "/host",
+      redirectTo: pathname,
     };
   } catch (error) {
     if (error.redirectTo) {
