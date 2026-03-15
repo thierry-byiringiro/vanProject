@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useParams, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { getHostVans } from "../../assets/api";
 import { requireAuth } from "../../assets/utils.js";
-export async function loader({ params }) {
-  await requireAuth();
+export async function loader({ params,request }) {
+  await requireAuth(request);
   return await getHostVans(params.id);
 }
 export default function HostVanDetail() {
@@ -11,12 +11,6 @@ export default function HostVanDetail() {
   if (!vanDetail) {
     return <h1>Loading ...</h1>;
   }
-  const elType =
-    vanDetail.type === "simple"
-      ? "#E17654"
-      : vanDetail.type === "rugged"
-        ? "#115E59"
-        : "#161616";
   return (
     <>
       <NavLink to=".." relative="path" className="back-button">
