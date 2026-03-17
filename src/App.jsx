@@ -16,7 +16,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Layout from "./pages/vans/Layout.jsx";
-import Dashboard from "./pages/host/Dashboard.jsx";
+import Dashboard,{loader as dashboardLoader} from "./pages/host/Dashboard.jsx";
 import Income from "./pages/host/Income.jsx";
 import Reviews from "./pages/host/Reviews.jsx";
 import HostLayout from "./component/HostLayout.jsx";
@@ -57,14 +57,13 @@ const router = createBrowserRouter(
         path="vans/:id"
         element={<VanDetails />}
         loader={vanDetailLoader}
+        errorElement={<Error />}
       />
       <Route path="host" element={<HostLayout />} errorElement={<Error />}>
         <Route
           index
           element={<Dashboard />}
-          loader={async ({ request }) => {
-            return requireAuth(request);
-          }}
+          loader={dashboardLoader}
         />
         <Route
           path="income"
